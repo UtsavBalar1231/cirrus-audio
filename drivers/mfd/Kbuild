@@ -1,0 +1,34 @@
+# add -Wall to try to catch everything we can.
+EXTRA_CFLAGS += -Wall
+EXTRA_CFLAGS += -I$(TOP)/vendor/cirrus/modules/include
+
+cirrus_madera-core-objs = madera-core.o madera-spi.o
+
+EXTRA_CFLAGS += -DCONFIG_SND_SOC_MADERA_SLIMBUS
+
+ifneq ($(filter m y,$(CONFIG_MFD_CS47L15)),)
+    EXTRA_CFLAGS += -DCONFIG_MFD_CS47L15
+    cirrus_madera-core-objs += cs47l15-tables.o
+endif
+
+ifneq ($(filter m y,$(CONFIG_MFD_CS47L35)),)
+    EXTRA_CFLAGS += -DCONFIG_MFD_CS47L35
+    cirrus_madera-core-objs += cs47l35-tables.o
+endif
+
+ifneq ($(filter m y,$(CONFIG_MFD_CS47L85)),)
+    EXTRA_CFLAGS += -DCONFIG_MFD_CS47L85
+    cirrus_madera-core-objs += cs47l85-tables.o
+endif
+
+ifneq ($(filter m y,$(CONFIG_MFD_CS47L90)),)
+    EXTRA_CFLAGS += -DCONFIG_MFD_CS47L90
+    cirrus_madera-core-objs += cs47l90-tables.o
+endif
+
+ifneq ($(filter m y,$(CONFIG_MFD_CS47L92)),)
+    EXTRA_CFLAGS += -DCONFIG_MFD_CS47L92
+    cirrus_madera-core-objs += cs47l92-tables.o
+endif
+
+obj-m += cirrus_madera-core.o

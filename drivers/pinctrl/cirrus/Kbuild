@@ -1,0 +1,32 @@
+# add -Wall to try to catch everything we can.
+EXTRA_CFLAGS += -Wall
+EXTRA_CFLAGS += -I$(TOP)/vendor/cirrus/modules/include
+
+cirrus_pinctrl-objs = pinctrl-madera.o
+
+ifneq ($(filter m y,$(CONFIG_PINCTRL_CS47L15)),)
+    EXTRA_CFLAGS += -DCONFIG_PINCTRL_CS47L15
+    cirrus_pinctrl-objs   += pinctrl-cs47l15.o
+endif
+ifneq ($(filter m y,$(CONFIG_PINCTRL_CS47L35)),)
+    EXTRA_CFLAGS += -DCONFIG_PINCTRL_CS47L35
+    cirrus_pinctrl-objs   += pinctrl-cs47l35.o
+endif
+ifneq ($(filter m y,$(CONFIG_PINCTRL_CS47L85)),)
+    EXTRA_CFLAGS += -DCONFIG_PINCTRL_CS47L85
+    cirrus_pinctrl-objs   += pinctrl-cs47l85.o
+endif
+ifneq ($(filter m y,$(CONFIG_PINCTRL_CS47L90)),)
+    EXTRA_CFLAGS += -DCONFIG_PINCTRL_CS47L90
+    cirrus_pinctrl-objs   += pinctrl-cs47l90.o
+endif
+ifneq ($(filter m y,$(CONFIG_PINCTRL_CS47L92)),)
+    EXTRA_CFLAGS += -DCONFIG_PINCTRL_CS47L92
+    cirrus_pinctrl-objs   += pinctrl-cs47l92.o
+endif
+
+obj-m += cirrus_pinctrl.o
+
+
+
+

@@ -1,0 +1,7 @@
+# add -Wall to try to catch everything we can.
+EXTRA_CFLAGS += -Wall
+EXTRA_CFLAGS += -I$(TOP)/vendor/cirrus/modules/include
+
+cirrus_irq-madera-objs = irq-madera.o
+
+obj-m += cirrus_irq-madera.o
